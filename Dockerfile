@@ -18,6 +18,7 @@ RUN apt-get update && apt-get -y install \
   perl \
   texlive-latex-recommended \
   texlive-luatex \
+  texlive-latex-extra \
   wget \
   && rm -rf /var/lib/apt/lists/*
 
@@ -40,7 +41,8 @@ RUN echo "export PATH='/usr/local/texlive/$YEAR/bin/x86_64-linux:$PATH'" >> ~/.b
 RUN source ~/.bashrc \
   && tlmgr init-usertree \
   && tlmgr update --self \
-  && tlmgr install latexmk
+  && tlmgr install latexmk \
+  && texhash
 
 WORKDIR /root
 ADD entry.sh ./
